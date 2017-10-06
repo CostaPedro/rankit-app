@@ -5,7 +5,7 @@ module.exports = {
     all: function(req, res){
         List.find({}, function(err, rankings){
             if(err) res.send(err);
-            res.json(rankings);
+            res.json(Rankings);
         })
     },
     viewOne: function(req, res){

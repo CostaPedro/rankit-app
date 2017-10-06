@@ -13,6 +13,8 @@ var port = 3000;
 var mongoose = require('mongoose');
 
 require('./config/models/ranking');
+
+
 var app = express();
 
 // view engine setup
@@ -24,20 +26,9 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
+
 // telling Express to serve static objects from /public 
 app.use(express.static(path.join(__dirname, 'public')));
-
-// Start server
-app.listen(port, function(){
-  console.log('Server listening on port ' + port)
-});
-
-//++++++++++++++++++++++++++==============++++++++++++++
-
-//Routes
-
-
-
 
 mongoose.connect('mongodb://localhost/Rankings', function(){
     console.log('connected to database!')
@@ -53,3 +44,18 @@ rankingsRouter.get('/', ranking.all);
 rankingsRouter.post('/create', ranking.create);
 rankingsRouter.post('/destroy/:id', ranking.destroy);
 rankingsRouter.post('/edit/:id', ranking.edit);
+
+// Start server
+app.listen(port, function(){
+  console.log('Server listening on port ' + port)
+});
+
+//++++++++++++++++++++++++++==============++++++++++++++
+
+//Routes
+
+
+
+
+
+
