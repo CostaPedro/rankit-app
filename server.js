@@ -1,6 +1,3 @@
-// This first section can be common to many apps:
-
-
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -11,6 +8,7 @@ var port = 3000;
 
 
 var mongoose = require('mongoose');
+	
 
 require('./config/models/ranking');
 
@@ -21,13 +19,17 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+//other way
+//app.use(express.static("public"));
+
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 
-// telling Express to serve static objects from /public 
+// telling Express to serve static objects from /public
+// or as in lines 21,22 
 app.use(express.static(path.join(__dirname, 'public')));
 
 mongoose.connect('mongodb://localhost/Rankings', function(){

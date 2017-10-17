@@ -1,6 +1,64 @@
-extends layout
 
-block content
-    h1= title
-    p Welcome to #{title}
-    a(href='/rankings').btn.btn-success.btn-lg View all rankings
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    | &#x9;
+    meta(name='viewport', content='width=device-width')
+    | &#x9;
+    meta(name='description', content='RankIt Application for keeping ordered lists')
+    | &#x9;
+    meta(name='keywords', content='web design, Pedro Costa, rankit')
+    | &#x9;
+    meta(name='author', content='Pedro Costa')
+    | &#x9;
+    title PedroCosta | About
+    | &#x9;
+    link(rel='stylesheet', href='./stylesheets/style.css')
+  body
+    header
+      .container
+        #branding
+          h1
+            span.highlight RankIt!
+            br
+            Keeping your favorite things organized
+        nav
+        | &#x9;&#x9;&#x9;
+        ul
+            li
+              a(href='index.html') Home
+            | &#x9;&#x9;&#x9;&#x9;&#x9;
+            li.current
+              a(href='about.html') About
+            | &#x9;&#x9;&#x9;&#x9;&#x9;
+            li
+              a(href='community.html') Community
+    | &#x9;
+    | &#x9;
+    section#newsletter
+      .container
+        h1 Login to your account
+        | &#x9;&#x9;&#x9;
+        form
+          input(type='email', placeholder='Enter Email...')
+          | &#x9;&#x9;&#x9;&#x9;
+          button.button_1 Login
+    | &#x9;
+    section#main
+      .container
+        article#main-col
+          h1  About Us 
+          | &#x9;&#x9;&#x9;&#x9;
+          p
+            | Everybody likes to remember their favorite things. Best restaurants in your city,. Coolest places you visited, Movies, Books, influential people, youtube videos. The possibilities are endless and its easy to forget all the names and details. RankIt! provides an easy way to catalogue, save and share your favorite things. And as our community grows, we can all learn from each other. That's what it's all about...
+        | &#x9;&#x9;&#x9;
+        aside#sidebar
+          .dark
+            h3 What We Do
+            | &#x9;&#x9;&#x9;&#x9;
+            p
+              | Register with us. Send us suggestions. We are always trying to improve and grow our community.ksjdhflkajdhfkajhdkjfhakjdhflkaj.lkajsdhfkjadkljhfkajdfkajdhflkajdfhj.ajdhkjahfksdjhf askdjhfk aksjdhfkaj akdjhflkj akdjhfkaj.adjhfkajhfkj.asjdflkj.
+    | &#x9;
+    footer
+      p This is just a first idea for this app. template 2017.
