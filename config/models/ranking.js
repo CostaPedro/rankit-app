@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'),
-    List = mongoose.List;
+    Schema = mongoose.Schema;
 
 // Ranking model
 var List = new Schema({
@@ -9,4 +9,6 @@ var List = new Schema({
     created_at: { type: Date, default: Date.now }
 });
 
-mongoose.model('List', List);
+const listModel = mongoose.model('List', List);
+
+module.exports = {listModel};

@@ -3,9 +3,10 @@ var mongoose = require('mongoose'),
 
 module.exports = {
     all: function(req, res){
+        console.log('!');
         List.find({}, function(err, rankings){
             if(err) res.send(err);
-            res.json(List);
+            res.json(rankings);
         })
     },
     viewOne: function(req, res){

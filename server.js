@@ -43,7 +43,7 @@ app.use('/rankings', rankingsRouter);
 
 app.get('/', main.index);
 rankingsRouter.get('/', ranking.all);
-rankingsRouter.post('/create', ranking.create);
+rankingsRouter.get('/create', ranking.create);
 rankingsRouter.post('/destroy/:id', ranking.destroy);
 rankingsRouter.post('/edit/:id', ranking.edit);
 
