@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    h1.text-center All Rankings
+    ul
+        for ranking in rankings
+        li #{ranking.content}
+    form(method='post', action='/ranking/create')
+        .input-group
+            input.form-control(type='text', placeholder='Name of the items to rank?', name='content')
+            span.input-group-btn
+                input.btn.btn-success(type='submit', value='Add Item')      

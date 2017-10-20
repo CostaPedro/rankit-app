@@ -14,9 +14,20 @@ module.exports = {
             res.render('ranking', { ranking: ranking[0] })
         });
     },
+    /*create: function(req, res){
+        console.log('Todo created')
+    },*/
+
     create: function(req, res){
-        console.log('Ranking created')
+        var rankingContent = req.body.content;
+        // create todo
+        List.create({ content: rankingContent }, function(err, ranking){
+            if(err) res.render('error', { error: 'Error adding item to your list'})
+            // reload collection
+            res.redirect('/rankings');
+            });
     },
+
     destroy: function(req, res){
         console.log('Ranking deleted')
     },
