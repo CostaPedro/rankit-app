@@ -9,6 +9,6 @@ var List = new Schema({
     created_at: { type: Date, default: Date.now }
 });
 
-const listModel = mongoose.model('List', List);
+mongoose.model('List', List);
 
-module.exports = {listModel};
+

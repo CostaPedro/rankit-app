@@ -1,12 +1,15 @@
 extends layout
 
 block content
-    h1.text-center All Rankings
-    ul
-        for ranking in rankings
-        li #{ranking.content}
-    form(method='post', action='/ranking/create')
-        .input-group
-            input.form-control(type='text', placeholder='Name of the items to rank?', name='content')
-            span.input-group-btn
-                input.btn.btn-success(type='submit', value='Add Item')      
+  h1.text-center All Lists
+  .panel.panel-default
+    for ranking in rankings
+      .panel-body
+        a(href='/rankings/#{ranking._id}') #{ranking.content}
+        form(action='/rankings/destroy/#{ranking._id}', method='post')
+          input.btn.btn-danger.pull-right(type='submit', value='Delete')
+  form(method='post', action='/rankings/create')
+    .input-group
+      input.form-control(type='text', placeholder='List Name?', name='content')
+      span.input-group-btn
+        input.btn.btn-success(type='submit', value='Add list name')  

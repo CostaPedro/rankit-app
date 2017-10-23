@@ -1,23 +1,25 @@
 var mongoose = require('mongoose'),
-    List = mongoose.model('List');
+List = mongoose.model('List');    
 
 module.exports = {
+    
+
+
+
+
     all: function(req, res){
-        console.log('!');
-        List.find({}, function(err, rankings){
-            if(err) res.send(err);
-            res.json(rankings);
-        })
+        console.log('we are in ranking.all')
+        List.find({}, function(err, ranking){
+            if(err) res.render('error', { error: 'Could not fetch items from database :('});
+            console.log('in the callback')
+            res.render('ranking', { ranking: ranking });
+        });
     },
     viewOne: function(req, res){
         List.find({ _id: req.params.id }, function(err, ranking){
             res.render('ranking', { ranking: ranking[0] })
         });
     },
-    /*create: function(req, res){
-        console.log('Todo created')
-    },*/
-
     create: function(req, res){
         var rankingContent = req.body.content;
         // create todo
@@ -27,11 +29,17 @@ module.exports = {
             res.redirect('/rankings');
             });
     },
-
     destroy: function(req, res){
-        console.log('Ranking deleted')
+        var id = req.params.id;
+
+        List.findByIdAndRemove(id, function(err, ranking){
+            if(err) res.render('error', { error: 'Error deleting ranking'});
+            res.redirect('/rankings');
+        });
     },
     edit: function(req, res){
-        console.log('Ranking ' + req.params.id + ' updated')
+        Todo.findOneAndUpdate({ _id: req.params.id }, {content: req.body.content}, function(err, ranking){
+            res.redirect('/rankings');
+        });
     }
 };
