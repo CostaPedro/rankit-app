@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 // Ranking model
 var List = new Schema({
-    title: {type: String},
+    title: String,
     author: {type: String},
     entries: {type:Array, default:[]},
     created_at: { type: Date, default: Date.now }

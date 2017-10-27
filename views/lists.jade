@@ -1,15 +1,17 @@
 extends layout
 
 block content
-  h1.text-center All Lists
+  h1.text-center My Lists
   .panel.panel-default
-    for ranking in rankings
+    for list in ranking
       .panel-body
-        a(href='/rankings/#{ranking._id}') #{ranking.content}
-        form(action='/rankings/destroy/#{ranking._id}', method='post')
+        a(href='/rankings/#{list._id}') #{list.title}
+        form(action='/rankings/destroy/#{list._id}', method='post')
           input.btn.btn-danger.pull-right(type='submit', value='Delete')
   form(method='post', action='/rankings/create')
     .input-group
-      input.form-control(type='text', placeholder='List Name?', name='content')
+      input.form-control(type='text', placeholder='New list?', name='content')
       span.input-group-btn
-        input.btn.btn-success(type='submit', value='Add list name')  
+        input.btn.btn-success(type='submit', value='Add List')
+
+

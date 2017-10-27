@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h1 #{ranking.title}
+
+    form(method='post', action='/rankings/editor')
+    .input-group
+      input.form-control(type='text', placeholder='Item?', name='listItem')
+      span.input-group-btn
+        input.btn.btn-success(type='submit', value='Add Item')
