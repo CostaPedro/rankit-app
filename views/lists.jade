@@ -3,9 +3,9 @@ extends layout
 block content
   h1.text-center My Lists
   .panel.panel-default
-    for list in ranking
+    for list in results
       .panel-body
-        a(href='/rankings/#{list._id}') #{list.title}
+        a(href='/rankings/#{list._id}') #{list.title} 
         form(action='/rankings/destroy/#{list._id}', method='post')
           input.btn.btn-danger.pull-right(type='submit', value='Delete')
   form(method='post', action='/rankings/create')

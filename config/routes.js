@@ -9,8 +9,10 @@ module.exports = function(app){
 
     app.get('/', main.index);
     rankRouter.get('/', ranking.all);
+    rankRouter.post('/edit/:id', ranking.edit);
     rankRouter.get('/:id', ranking.viewOne);
     rankRouter.post('/create', ranking.create);
     rankRouter.post('/destroy/:id', ranking.destroy);
-    rankRouter.post('/edit/:id', ranking.edit);
+    rankRouter.post('/:id/addItem', ranking.addItem);
+    rankRouter.post('/:id/removeItem',ranking.removeItem);
 };

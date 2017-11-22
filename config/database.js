@@ -8,4 +8,6 @@ module.exports = function(envConfig){
     mongoose.connect(envConfig.database, function(){
         console.log('connected to database!')
     });
+
+    mongoose.connection.on('error', function() { console.log('MongoDB Connection Error. Please make sure that MongoDB is running.'); process.exit(1); });
 };
