@@ -4,8 +4,8 @@ var mongoose = require('mongoose'),
 // Ranking model
 
 var Entries = new Schema({
-    title: String
-  , body: String
+    title: {type: String, required: true},
+  	body: String
 });
 
 var List = new Schema({
@@ -14,6 +14,7 @@ var List = new Schema({
     entries: [Entries],
     created_at: { type: Date, default: Date.now }
 });
+
 
 mongoose.model('List', List);
 

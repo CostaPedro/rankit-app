@@ -52,7 +52,6 @@ module.exports = {
             {$push:
                 {"entries":{title:itemName}},
             },{new:true}, function(err, ranking){
-                
                 res.render('edit', {ranking:ranking});
             }); 
     },
