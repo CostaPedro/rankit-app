@@ -3,14 +3,21 @@ extends layout
 block content
 	h1 #{ranking.title}
 	form(method='post', action='/rankings/#{ranking._id}/addItem')
-		.input-group
-			input.form-control(type='text', placeholder='', name='content')
-			span.input-group-btn
-				input.btn.btn-success(type='submit', value='Add Name')  
+		div.form-group
+			label(for="Name") Name:
+			input#title.form-control(type='text', placeholder=' Name', name='content')
+		div.form-group
+			label(for="Notes") Notes:
+			input#notes.form-control(type='textarea', placeholder=' Notes', name='notes', value'Notes',required='false')
+		div.form-group
+			label(for="Rank") Rank:
+			input#notes.form-control(type='textarea', placeholder=' Rank', name='rank', value'rank',required='false')
+		span.input-group-btn
+			input.btn.btn-success(type='submit', value='Add To Your List')
 	ul 
 		each item in ranking.entries
-			li=item.title
+			li(draggable="true")=item.title
 				form(action='/rankings/#{ranking._id}/removeItem', method='post')
 					input(type="hidden",value=item._id,name="itemId")
-					input.btn.btn-success(type='submit',value='Delete',onclick="return deleteConfirm()")
+					input.btn.btn-success(type='submit',value='Delete',onClick="return deleteConfirm()")
 	

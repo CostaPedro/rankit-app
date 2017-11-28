@@ -50,8 +50,14 @@ module.exports = {
         console.log(id); 
         List.findOneAndUpdate({_id:id},
             {$push:
-                {"entries":{title:itemName}},
-            },{new:true}, function(err, ranking){
+                {"entries":{
+                    title:itemName, /*"$sort":{rank:rankNumber}*/
+                    }
+                },
+            },
+            {new:true}, 
+            function(err, ranking){
+                console.log(ranking);
                 res.render('edit', {ranking:ranking});
             }); 
     },
