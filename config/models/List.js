@@ -5,6 +5,8 @@ var mongoose = require('mongoose'),
 
 var Entries = new Schema({
     title: {type: String, required: true},
+    notes: {type:String},
+    rank: {type:Number},
   	body: String
 });
 

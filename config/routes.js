@@ -15,4 +15,6 @@ module.exports = function(app){
     rankRouter.post('/destroy/:id', ranking.destroy);
     rankRouter.post('/:id/addItem', ranking.addItem);
     rankRouter.post('/:id/removeItem',ranking.removeItem);
+    rankRouter.get('/:id/editItemPage/:itemId',ranking.editItemPage);
+    rankRouter.post('/:itemId/editItem',ranking.editItem)
 };

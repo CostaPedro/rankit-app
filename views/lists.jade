@@ -7,7 +7,7 @@ block content
       .panel-body
         a(href='/rankings/#{list._id}') #{list.title} 
         form(action='/rankings/destroy/#{list._id}', method='post')
-          input.btn.btn-danger.pull-right(type='submit', value='Delete')
+          input.btn.btn-danger.pull-right(type='submit', value='Delete', onClick="return deleteConfirm()")
   form(method='post', action='/rankings/create')
     .input-group
       input.form-control(type='text', placeholder='New list?', name='content')

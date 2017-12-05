@@ -44,20 +44,30 @@ module.exports = {
     addItem: function(req,res){
         console.log('we are in the addItem');
         var itemName = req.body.content;
-        console.log(itemName);
+        var notes =req.body.notes;
+        var rank =req.body.rank;
+        console.log(itemName,notes, rank);
         var id = req.params.id;
         var currentBody = req.body;
-        console.log(id); 
         List.findOneAndUpdate({_id:id},
             {$push:
                 {"entries":{
-                    title:itemName, /*"$sort":{rank:rankNumber}*/
+                    title:itemName, notes:notes, rank:rank
                     }
                 },
             },
-            {new:true}, 
+            {new:true},
             function(err, ranking){
-                console.log(ranking);
+                var obj = ranking.entries;
+                function compare(a,b) {
+                    if (a.rank < b.rank)
+                        return -1;
+                    if (a.rank > b.rank)
+                        return 1;
+                        return 0;
+                }
+
+                obj.sort(compare);
                 res.render('edit', {ranking:ranking});
             }); 
     },
@@ -74,5 +84,40 @@ module.exports = {
             console.log(err, ranking);    
                 res.render('edit', {ranking:ranking});
             }); 
+    },
+    editItemPage: function(req,res){
+        console.log('passing through the editItemPage');
+        var itemToUpdate=req.params.itemId;
+        var list=req.params.id;
+        console.log(list,itemToUpdate);
+        List.findOne({_id:list}, 
+            function(err, obj){
+                var selArray = obj.entries;
+                selArray.forEach( function (arrayItem){
+                    if (arrayItem._id==itemToUpdate){
+                        var selected = (arrayItem);
+                        console.log(selected);
+                        res.render('editItem', {selected:selected});
+                    };   
+                });
+            }
+        )       
+    },
+    editItem: function(req,res){
+        console.log('we are in the editItem');
+        /*var itemToUpdate=req.body.title;
+        console.log(itemToUpdate);
+        var id = req.params.id;
+        console.log(id); 
+        List.findOneAndUpdate(
+            {_id:id,"entries._id":entries._id},
+            {
+                "$set":{
+                "name":req.body.name, "notes":req.body.notes,"rank":req.body.rank}
+                }
+            ,{new:true}, function(err, ranking){
+            console.log(err, ranking);    
+                res.render('edit', {entryItem:entryItem});
+            }); */
     }
 };

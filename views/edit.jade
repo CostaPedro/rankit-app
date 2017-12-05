@@ -8,16 +8,20 @@ block content
 			input#title.form-control(type='text', placeholder=' Name', name='content')
 		div.form-group
 			label(for="Notes") Notes:
-			input#notes.form-control(type='textarea', placeholder=' Notes', name='notes', value'Notes',required='false')
+			input#notes.form-control(type='textarea', placeholder=' Notes', name='notes',required='false')
 		div.form-group
 			label(for="Rank") Rank:
-			input#notes.form-control(type='textarea', placeholder=' Rank', name='rank', value'rank',required='false')
-		span.input-group-btn
-			input.btn.btn-success(type='submit', value='Add To Your List')
-	ul 
+			input#notes.form-control(type='textarea', placeholder=' Rank', name='rank',required='false')
+		span.input-group-btn()
+			input.btn.btn-success#newItem(type='submit', value='Add To Your List')
+	ol 
 		each item in ranking.entries
-			li(draggable="true")=item.title
+			li #{item.title}
+				p #{item.notes}
 				form(action='/rankings/#{ranking._id}/removeItem', method='post')
 					input(type="hidden",value=item._id,name="itemId")
 					input.btn.btn-success(type='submit',value='Delete',onClick="return deleteConfirm()")
+					a(href='/rankings/#{ranking._id}/editItemPage/#{item._id}') EDIT
+
+			
 	

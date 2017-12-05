@@ -4,3 +4,13 @@ function deleteConfirm(){
 	return x;
 };
 
+/*document.getElementById("newItem").addEventListener("submit", function(e){
+	e.preventDefault();
+	var entriesArray= [];
+	console.log("In prevent dupes");
+	for (var i=0; i<inputs.length; i++){
+		if(entriesArray.indexOf(inputs[i].value)!=-1){
+
+		}
+
+}; */
