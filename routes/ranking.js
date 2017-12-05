@@ -105,19 +105,34 @@ module.exports = {
     },
     editItem: function(req,res){
         console.log('we are in the editItem');
-        /*var itemToUpdate=req.body.title;
-        console.log(itemToUpdate);
-        var id = req.params.id;
-        console.log(id); 
+        var itemId= req.params.itemId;
+        console.log(req.body.content,req.body.notes,req.body.rank);
         List.findOneAndUpdate(
-            {_id:id,"entries._id":entries._id},
+            {'entries._id':itemId},
             {
                 "$set":{
-                "name":req.body.name, "notes":req.body.notes,"rank":req.body.rank}
+                "entries.$.name":req.body.name, "entries.$.notes":req.body.notes,"entries.$.rank":req.body.rank
                 }
-            ,{new:true}, function(err, ranking){
-            console.log(err, ranking);    
-                res.render('edit', {entryItem:entryItem});
-            }); */
+            },
+            {new:true},
+            function(err, item){
+            console.log(err, item);
+            }
+        );
+        List.findOne(
+            {'entries._id':itemId},
+            function(err,ranking){
+                var obj = ranking.entries;
+                function compare(a,b) {
+                    if (a.rank < b.rank)
+                        return -1;
+                    if (a.rank > b.rank)
+                        return 1;
+                        return 0;
+                }
+            obj.sort(compare);
+            res.render('edit', {ranking:ranking});
+            }
+        )
     }
 };
