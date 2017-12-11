@@ -2,7 +2,7 @@ extends layout
 
 block content
 	h1 #{selected.title}
-	form(method='post', action='/rankings/#{selected._id}/editItem')
+	form(method='post', action='/rankings/#{selected._id}/editItem', novalidate)
 		div.form-group
 			label(for="Name") Edit Name?:
 			input#title.form-control(type='text', placeholder=' Name', name='content')

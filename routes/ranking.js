@@ -118,7 +118,7 @@ module.exports = {
             function(err, item){
             console.log(err, item);
             }
-        );
+        )
         List.findOne(
             {'entries._id':itemId},
             function(err,ranking){
@@ -131,6 +131,8 @@ module.exports = {
                         return 0;
                 }
             obj.sort(compare);
+            console.log("printing obj", obj);
+            console.log("printing ranking", ranking);
             res.render('edit', {ranking:ranking});
             }
         )

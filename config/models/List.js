@@ -4,14 +4,14 @@ var mongoose = require('mongoose'),
 // Ranking model
 
 var Entries = new Schema({
-    title: {type: String, required: true},
+    title: {unique: true, type: String, required: true},
     notes: {type:String},
     rank: {type:Number},
   	body: String
 });
 
 var List = new Schema({
-    title: {type:String, required:true},
+    title: {type:String, required:true, unique:true},
     author: {type: String},
     entries: [Entries],
     created_at: { type: Date, default: Date.now }
