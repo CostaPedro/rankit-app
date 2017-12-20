@@ -14,6 +14,7 @@ module.exports = {
     viewOne: function(req, res){
         console.log('viewOne')
         List.find({ _id: req.params.id }, function(err, ranking){
+            console.log(ranking);
             res.render('edit', { ranking: ranking[0] })
         });
     },
@@ -43,10 +44,11 @@ module.exports = {
     },
     addItem: function(req,res){
         console.log('we are in the addItem');
+        
         var itemName = req.body.content;
         var notes =req.body.notes;
         var rank =req.body.rank;
-        console.log(itemName,notes, rank);
+        console.log(itemName, notes, rank);
         var id = req.params.id;
         var currentBody = req.body;
         List.findOneAndUpdate({_id:id},
@@ -58,17 +60,25 @@ module.exports = {
             },
             {new:true},
             function(err, ranking){
-                var obj = ranking.entries;
-                function compare(a,b) {
-                    if (a.rank < b.rank)
-                        return -1;
-                    if (a.rank > b.rank)
-                        return 1;
-                        return 0;
+                var error
+                if (err){
+                    error=err.message;
+                    ranking={};
+                    ranking.entries=[];
                 }
+                else {
+                    var obj = ranking.entries;
+                    function compare(a,b) {
+                        if (a.rank < b.rank)
+                            return -1;
+                        if (a.rank > b.rank)
+                            return 1;
+                            return 0;
+                    }
 
-                obj.sort(compare);
-                res.render('edit', {ranking:ranking});
+                    obj.sort(compare);
+                }
+                res.render('edit', {error:error, ranking:ranking});
             }); 
     },
     removeItem: function(req,res){
@@ -116,25 +126,27 @@ module.exports = {
             },
             {new:true},
             function(err, item){
-            console.log(err, item);
-            }
-        )
-        List.findOne(
-            {'entries._id':itemId},
-            function(err,ranking){
-                var obj = ranking.entries;
-                function compare(a,b) {
-                    if (a.rank < b.rank)
-                        return -1;
-                    if (a.rank > b.rank)
-                        return 1;
-                        return 0;
+                if (!err) {
+                    List.findOne(
+                        {'entries._id':itemId},
+                        function(err,entryList){
+                            var obj = entryList.entries;
+                            function compare(a,b) {
+                                if (a.rank < b.rank)
+                                    return -1;
+                                if (a.rank > b.rank)
+                                    return 1;
+                                    return 0;
+                            }
+                            obj.sort(compare);
+                            console.log("printing obj", obj);
+                            console.log("printing entryList", entryList);
+                            res.redirect('/rankings/'+ item._id);
+                        }
+                    )
                 }
-            obj.sort(compare);
-            console.log("printing obj", obj);
-            console.log("printing ranking", ranking);
-            res.render('edit', {ranking:ranking});
             }
         )
+        
     }
 };

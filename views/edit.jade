@@ -1,8 +1,10 @@
 extends layout
 
 block content
+	if error 
+		p ERROR
 	h1 #{ranking.title}
-	form(method='post', action='/rankings/#{ranking._id}/addItem')
+	form#newItem(method='post', action='/rankings/#{ranking._id}/addItem')
 		div.form-group
 			label(for="Name") Name:
 			input#title.form-control(type='text', placeholder=' Name', name='content')
@@ -13,7 +15,7 @@ block content
 			label(for="Rank") Rank:
 			input#notes.form-control(type='textarea', placeholder=' Rank', name='rank',required='false')
 		span.input-group-btn()
-			input.btn.btn-success#newItem(type='submit', value='Add To Your List')
+			input(type='submit', value='Add To Your List')
 	ol 
 		each item in ranking.entries
 			li #{item.title}

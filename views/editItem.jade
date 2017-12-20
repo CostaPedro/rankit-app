@@ -5,12 +5,12 @@ block content
 	form(method='post', action='/rankings/#{selected._id}/editItem', novalidate)
 		div.form-group
 			label(for="Name") Edit Name?:
-			input#title.form-control(type='text', placeholder=' Name', name='content')
+			input#title.form-control(type='text', placeholder=' Name', name='content',value=selected.title)
 		div.form-group
 			label(for="Notes") Edit Notes?:
-			input#notes.form-control(type='textarea', placeholder=' Notes', name='notes',required='false')
+			input#notes.form-control(type='textarea', placeholder=' Notes', name='notes',required='false',value=selected.notes)
 		div.form-group
 			label(for="Rank") Edit Rank?:
-			input#notes.form-control(type='textarea', placeholder=' Rank', name='rank',required='false')
+			input#notes.form-control(type='textarea', placeholder=' Rank', name='rank',required='false',value=selected.rank)
 		span.input-group-btn
 			input.btn.btn-success(type='submit', value='Update Entry')
